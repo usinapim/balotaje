@@ -1,0 +1,27 @@
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+theme:
+    resource: "@ThemeBundle/Resources/config/routing.yml"
+    prefix:   /theme
+
+ubicacion:
+    resource: "@UbicacionBundle/Resources/config/routing.yml"
+    prefix:   /ubicacion
+
+util:
+    resource: "@UtilBundle/Resources/config/routing.yml"
+    prefix:   /utils
+
+usuarios:
+    resource: "@UsuariosBundle/Resources/config/routing.yml"
+    prefix:   /usuarios
+
+balotaje:
+    resource: "@BalotajeBundle/Resources/config/routing.yml"
+    prefix:   /balotaje
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+

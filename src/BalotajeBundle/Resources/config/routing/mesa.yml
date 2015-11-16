@@ -1,0 +1,30 @@
+mesas:
+    path:     /
+    defaults: { _controller: "BalotajeBundle:Mesa:index" }
+
+mesas_show:
+    path:     /{id}/show
+    defaults: { _controller: "BalotajeBundle:Mesa:show" }
+
+mesas_new:
+    path:     /new
+    defaults: { _controller: "BalotajeBundle:Mesa:new" }
+
+mesas_create:
+    path:     /create
+    defaults: { _controller: "BalotajeBundle:Mesa:create" }
+    methods:  POST
+
+mesas_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BalotajeBundle:Mesa:edit" }
+
+mesas_update:
+    path:     /{id}/update
+    defaults: { _controller: "BalotajeBundle:Mesa:update" }
+    methods:  [POST, PUT]
+
+mesas_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BalotajeBundle:Mesa:delete" }
+    methods:  [POST, DELETE]
