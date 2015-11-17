@@ -43,10 +43,16 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        {% if not app.user %}
+                            <li>
+                                <a href="{{ path('fos_user_security_login') }}">Ingresar</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">Cerrar sesión</a>
+                            </li>
 
-                        <li>
-                            <a href="{{ path('fos_user_security_login') }}">Ingresar</a>
-                        </li>
+                        {% endif %}
                     </ul>
                 </div><!-- /.navbar-custom-menu -->
             </div><!-- /.container-fluid -->
@@ -74,18 +80,20 @@
     </footer>
 </div><!-- ./wrapper -->
 {% block javascripts %}
-<!-- jQuery 2.1.4 -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js') }}">
-<!-- SlimScroll -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/fastclick/fastclick.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/dist/js/app.min.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('bundles/theme/AdminLTE-2.3.0/dist/js/demo.js') }}"></script>
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="{{ asset('bundles/theme/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js') }}">
+        <!-- SlimScroll -->
+        <
+        script
+        src = "{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/slimScroll/jquery.slimscroll.min.js') }}" ></script>
+    <!-- FastClick -->
+    <script src="{{ asset('bundles/theme/AdminLTE-2.3.0/plugins/fastclick/fastclick.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('bundles/theme/AdminLTE-2.3.0/dist/js/app.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('bundles/theme/AdminLTE-2.3.0/dist/js/demo.js') }}"></script>
 {% endblock javascripts %}
 </body>
 </html>
