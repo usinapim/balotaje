@@ -1,4 +1,4 @@
-{% extends 'ThemeBundle:Default:layout_base.html.twig' %}
+{% extends 'ThemeBundle:Default:layout_anonimous.html.twig' %}
 
 {% block content_title %}
 {% endblock %}
@@ -26,6 +26,13 @@
             porcentajeCambiemos = 100 - ((cambiemos * 100) / total ) - 25;
             porcentajeFpv = 100 - ((fpv * 100) / total ) - 25;
 
+            if (porcentajeCambiemos < 16.915) {
+                porcentajeCambiemos = 16.915;
+            }
+            if (porcentajeFpv < 18.085) {
+                porcentajeFpv = 18.085;
+            }
+
 //            $('#div-cambiemos').css('padding-top', porcentajeCambiemos);
 //            $('#div-fpv').css('padding-top', porcentajeFpv);
 //
@@ -40,11 +47,11 @@
             $('#div-cambiemos .img-responsive').attr('src', macriFeliz);
             $('#div-fpv .img-responsive').attr('src', scioliTFeliz);
 
-            $('#div-cambiemos').animate({top: 50 + '%'}, 1500);
-            $('#div-fpv').animate({top: 50 + '%'}, 1500);
+//            $('#div-cambiemos').animate({top: 50 + '%'}, 1500);
+//            $('#div-fpv').animate({top: 50 + '%'}, 1500);
 
-            $('#div-cambiemos').animate({top: porcentajeCambiemos + '%'}, 1500);
-            $('#div-fpv').animate({top: porcentajeFpv + '%'}, 1500);
+            $('#div-cambiemos').animate({top: porcentajeCambiemos + '%'}, 2000);
+            $('#div-fpv').animate({top: porcentajeFpv + '%'}, 2000);
 
 
             setTimeout(function () {
@@ -76,8 +83,8 @@
                 }
 
                 $("#porcentaje-fpv").show('slow');
-                $("#porcentaje-fpv").html(''+ ( ((fpv * 100) / total )).toFixed(2)+' %');
-                $("#porcentaje-cambiemos").html(''+(((cambiemos * 100) / total )).toFixed(2)+' %');
+                $("#porcentaje-fpv").html('' + ( ((fpv * 100) / total )).toFixed(2) + ' %');
+                $("#porcentaje-cambiemos").html('' + (((cambiemos * 100) / total )).toFixed(2) + ' %');
                 $("#porcentaje-cambiemos").show('slow');
             }, 2500);
 
@@ -87,31 +94,57 @@
 {% endblock %}
 
 {% block content -%}
-    <div class="row"
-         style="background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}')  no-repeat center center fixed;
-                 -webkit-background-size: cover;
-                 background-size: cover;">
+    <style>
+        {#.content-wrapper{#}
+        {#background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}') no-repeat;#}
+        {#}#}
+        .row {
+            background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}') no-repeat;
+            /*background-size: cover;*/
+            background-size: 100% 500px;
+            width: 100%;
+            /*height: 100%;*/
+            overflow: hidden;
+            height: 500px;
+
+        }
+        .logo-pim{
+            height: 3%;
+        }
+    </style>
+    {#<div class="row"#}
+    {#style="background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}')  no-repeat center center ;#}
+    {#-webkit-background-size: cover;#}
+    {#background-size: cover;">#}
+    <div class="row">
+        <div class="logo-pim">
+            <img class="img-responsive" src="{{ asset('bundles/app/img/LOGO PIM.png') }}">
+        </div>
         <div id="div-grafico">
-            <div class="col-md-2 col-md-offset-1" style=" text-align: right; font-size: 35px; position: relative; top:80%; left: 100px; z-index: 1000000;"   >
+            <div class="col-md-2 col-md-offset-1"
+                 style=" text-align: right; font-size: 35px; position: relative; top:80%; left: 18%; z-index: 1000000;">
                 <span id="porcentaje-fpv" class="label label-primary">FpV</span><br>
-                <img src="{{ asset('bundles/app/img/fpv_logo.jpg') }}" style="max-height: 80px;">
+                <img src="{{ asset('bundles/app/img/fpv_logo.jpg') }}" style="max-height: 45px;">
 
             </div>
-            <div class="col-md-3 text-center" style="margin-right: -75px; " id="div-fpv">
+            <div class="col-md-3 text-center" style="margin-right: -75px; top:100%" id="div-fpv">
 
 
                 <img style="position: absolute" class="img-responsive">
             </div>
-            
-            <div class="col-md-3  text-center" style="margin-left: -35px;  " id="div-cambiemos">
+
+            <div class="col-md-3  text-center" style="margin-left: -35px;top:100%;  " id="div-cambiemos">
 
                 <img style="position: absolute" class="img-responsive">
 
             </div>
 
-            <div class="col-md-2" style=" font-size: 35px; position: relative; top:60%;top:80%; left: -100px; z-index: 1000000; "   >
-                <span id="porcentaje-cambiemos" class="label label-warning">Cambiemos</span><br>
-                <img src="{{ asset('bundles/app/img/cambiemos_logo.png') }}" style="max-height: 80px;">
+            <div class="col-md-2"
+                 style=" font-size: 35px; position: relative; top:60%;top:80%; left: -18%; z-index: 1000000; ">
+                <span id="porcentaje-cambiemos" class="label label-warning"
+                      style="margin-left: 20%;">Cambiemos</span><br>
+                <img src="{{ asset('bundles/app/img/cambiemos_logo.png') }}"
+                     style="max-height: 45px; background-color: white;">
 
             </div>
 
