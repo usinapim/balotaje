@@ -11,8 +11,8 @@
             $('.main-footer').hide();
             //altura = $(".content-wrapper").height() - 100;
             altura = 450;
-            cambiemos = {{ votos.cambiemos }};
-            fpv = {{ votos.fpv }};
+            cambiemos = {{ votos.cambiemos |default(1)}};
+            fpv = {{ votos.fpv |default(1) }};
 
             total = cambiemos + fpv;
 
@@ -67,7 +67,7 @@
                         $('#div-fpv .img-responsive').fadeIn('slow');
                     });
                     $('#div-fpv').css('z-index', '1');
-                } else {
+                } else if (cambiemos < fpv) {
                     //$('#div-cambiemos img').attr('src', macriTriste);
                     $('#div-cambiemos .img-responsive').fadeOut('slow', function () {
                         $('#div-cambiemos .img-responsive').attr('src', macriTriste);
@@ -78,10 +78,10 @@
                     $('#div-fpv').css('z-index', '5');
                 }
 
-                if (cambiemos == fpv) {
-                    $('#div-cambiemos .img-responsive').attr('src', macriTriste);
-                    $('#div-fpv .img-responsive').attr('src', scioliTriste);
-                }
+//                if (cambiemos == fpv) {
+//                    $('#div-cambiemos .img-responsive').attr('src', macriTriste);
+//                    $('#div-fpv .img-responsive').attr('src', scioliTriste);
+//                }
 
                 $("#porcentaje-fpv").show('slow');
                 $("#porcentaje-fpv").html('' + ( ((fpv * 100) / total )).toFixed(2) + ' %');
