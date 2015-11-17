@@ -3,5 +3,5 @@ balotaje_mesas:
     prefix:   /mesas
 
 resultados:
-    path:     /resultados
+    path:     /
     defaults: { _controller: "BalotajeBundle:Default:index" }
