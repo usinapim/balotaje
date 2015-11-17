@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('BalotajeBundle:Default:index.html.twig', array('name' => $name));
+        $votos = $this->getDoctrine()->getRepository("BalotajeBundle:Mesa")->contarVotos();
+
+        return $this->render('BalotajeBundle:Default:index.html.twig', array('votos' => $votos[0]));
     }
 }

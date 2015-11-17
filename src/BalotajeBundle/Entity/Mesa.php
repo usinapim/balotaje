@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Mesa
  *
  * @ORM\Table(name="mesas")
- * @ORM\Entity
+ * @ORM\Entity* @ORM\Entity(repositoryClass="BalotajeBundle\Entity\MesaRepository")
  */
 class Mesa {
 	/**

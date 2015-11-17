@@ -2,6 +2,6 @@ balotaje_mesas:
     resource: "@BalotajeBundle/Resources/config/routing/mesa.yml"
     prefix:   /mesas
 
-balotaje_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BalotajeBundle:Default:index }
+resultados:
+    path:     /resultados
+    defaults: { _controller: "BalotajeBundle:Default:index" }

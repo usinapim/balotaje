@@ -1,1 +1,124 @@
-Hello {{ name }}!
+{% extends 'ThemeBundle:Default:layout_base.html.twig' %}
+
+{% block content_title %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function () {
+            $('.main-footer').hide();
+            altura = $(".content-wrapper").height() - 100;
+            cambiemos = {{ votos.cambiemos }};
+            fpv = {{ votos.fpv }};
+
+            total = cambiemos + fpv;
+
+
+            $('#div-grafico').height(altura);
+            $('#div-cambiemos').height(altura);
+            $('#div-fpv').height(altura);
+
+//            porcentajeCambiemos = altura - ((cambiemos * altura) / total );
+//            porcentajeFpv = altura - ((fpv * altura) / total );
+
+            porcentajeCambiemos = 100 - ((cambiemos * 100) / total ) - 25;
+            porcentajeFpv = 100 - ((fpv * 100) / total ) - 25;
+
+//            $('#div-cambiemos').css('padding-top', porcentajeCambiemos);
+//            $('#div-fpv').css('padding-top', porcentajeFpv);
+//
+//            $('#div-cambiemos').css('top', porcentajeCambiemos + '%');
+//            $('#div-fpv').css('top', porcentajeFpv + '%');
+
+            macriFeliz = "{{ asset('bundles/app/img/cuerpo macri feliz.png') }}";
+            macriTriste = "{{ asset('bundles/app/img/cuerpo macri triste.png') }}";
+            scioliTriste = "{{ asset('bundles/app/img/CUERPO SCIOLI TRISTE.png') }}";
+            scioliTFeliz = "{{ asset('bundles/app/img/CUERPO SCIOLI FELIZ.png') }}";
+
+            $('#div-cambiemos .img-responsive').attr('src', macriFeliz);
+            $('#div-fpv .img-responsive').attr('src', scioliTFeliz);
+
+            $('#div-cambiemos').animate({top: 50 + '%'}, 1500);
+            $('#div-fpv').animate({top: 50 + '%'}, 1500);
+
+            $('#div-cambiemos').animate({top: porcentajeCambiemos + '%'}, 1500);
+            $('#div-fpv').animate({top: porcentajeFpv + '%'}, 1500);
+
+
+            setTimeout(function () {
+
+
+                if (cambiemos > fpv) {
+                    $('#div-cambiemos .img-responsive').attr('src', macriFeliz);
+                    $('#div-cambiemos').css('z-index', '5');
+                    //$('#div-fpv img').attr('src', scioliTriste);
+                    $('#div-fpv .img-responsive').fadeOut('slow', function () {
+                        $('#div-fpv .img-responsive').attr('src', scioliTriste);
+                        $('#div-fpv .img-responsive').fadeIn('slow');
+                    });
+                    $('#div-fpv').css('z-index', '1');
+                } else {
+                    //$('#div-cambiemos img').attr('src', macriTriste);
+                    $('#div-cambiemos .img-responsive').fadeOut('slow', function () {
+                        $('#div-cambiemos .img-responsive').attr('src', macriTriste);
+                        $('#div-cambiemos .img-responsive').fadeIn('slow');
+                    });
+                    $('#div-cambiemos').css('z-index', '1');
+                    $('#div-fpv .img-responsive').attr('src', scioliTFeliz);
+                    $('#div-fpv').css('z-index', '5');
+                }
+
+                if (cambiemos == fpv) {
+                    $('#div-cambiemos .img-responsive').attr('src', macriTriste);
+                    $('#div-fpv .img-responsive').attr('src', scioliTriste);
+                }
+
+                $("#porcentaje-fpv").show('slow');
+                $("#porcentaje-fpv").html(''+ ( ((fpv * 100) / total )).toFixed(2)+' %');
+                $("#porcentaje-cambiemos").html(''+(((cambiemos * 100) / total )).toFixed(2)+' %');
+                $("#porcentaje-cambiemos").show('slow');
+            }, 2500);
+
+
+        });
+    </script>
+{% endblock %}
+
+{% block content -%}
+    <div class="row"
+         style="background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}')  no-repeat center center fixed;
+                 -webkit-background-size: cover;
+                 background-size: cover;">
+        <div id="div-grafico">
+            <div class="col-md-2 col-md-offset-1" style=" text-align: right; font-size: 35px; position: relative; top:80%; left: 100px; z-index: 1000000;"   >
+                <span id="porcentaje-fpv" class="label label-primary">FpV</span><br>
+                <img src="{{ asset('bundles/app/img/fpv_logo.jpg') }}" style="max-height: 80px;">
+
+            </div>
+            <div class="col-md-3 text-center" style="margin-right: -75px; " id="div-fpv">
+
+
+                <img style="position: absolute" class="img-responsive">
+            </div>
+            
+            <div class="col-md-3  text-center" style="margin-left: -35px;  " id="div-cambiemos">
+
+                <img style="position: absolute" class="img-responsive">
+
+            </div>
+
+            <div class="col-md-2" style=" font-size: 35px; position: relative; top:60%;top:80%; left: -100px; z-index: 1000000; "   >
+                <span id="porcentaje-cambiemos" class="label label-warning">Cambiemos</span><br>
+                <img src="{{ asset('bundles/app/img/cambiemos_logo.png') }}" style="max-height: 80px;">
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
