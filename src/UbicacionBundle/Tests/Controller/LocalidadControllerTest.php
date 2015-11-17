@@ -19,7 +19,7 @@ class LocalidadControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'bigd_ubicacionbundle_localidad[field_name]'  => 'Test',
+            'ubicacionbundle_localidad[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class LocalidadControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'bigd_ubicacionbundle_localidad[field_name]'  => 'Foo',
+            'ubicacionbundle_localidad[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

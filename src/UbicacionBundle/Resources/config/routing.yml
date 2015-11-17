@@ -1,3 +1,7 @@
+ubicacion_localidad:
+    resource: "@UbicacionBundle/Resources/config/routing/localidad.yml"
+    prefix:   /localidad
+
 ubicacion_homepage:
     path:     /hello/{name}
     defaults: { _controller: UbicacionBundle:Default:index }

@@ -29,13 +29,14 @@ class Usuario extends BaseUser {
 	public function __construct() {
 		parent::__construct();
 		// your own logic
+		$this->roles = array('ROLE_USER');
 	}
 
 	/**
 	 * @var datetime $creado
 	 *
 	 * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(name="creado", type="datetime", nullable=true)
+	 * @ORM\Column(name="creado", type="datetime")
 	 */
 	private $creado;
 
@@ -43,7 +44,7 @@ class Usuario extends BaseUser {
 	 * @var datetime $actualizado
 	 *
 	 * @Gedmo\Timestampable(on="update")
-	 * @ORM\Column(name="actualizado",type="datetime", nullable=true)
+	 * @ORM\Column(name="actualizado",type="datetime")
 	 */
 	private $actualizado;
 

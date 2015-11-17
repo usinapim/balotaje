@@ -1,78 +1,79 @@
 <?php
 
-namespace UbicacionBundle\Controller;
+namespace UsuariosBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use UbicacionBundle\Entity\Localidad;
-use UbicacionBundle\Form\LocalidadType;
+use UsuariosBundle\Entity\Usuario;
+use UsuariosBundle\Form\UsuarioType;
 
 /**
- * Localidad controller.
+ * Usuario controller.
  *
  */
-class LocalidadController extends Controller
+class UsuarioController extends Controller
 {
 
     /**
-     * Lists all Localidad entities.
+     * Lists all Usuario entities.
      *
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UbicacionBundle:Localidad')->findAll();
+        $entities = $em->getRepository('UsuariosBundle:Usuario')->findAll();
 
-        $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-        $entities, $request->query->get('page', 1)/* page number */, 10/* limit per page */
-        );
+//        $paginator = $this->get('knp_paginator');
+//        $entities = $paginator->paginate(
+//        $entities, $this->get('request')->query->get('page', 1)/* page number */, 10/* limit per page */
+//        );
 
-        return $this->render('UbicacionBundle:Localidad:index.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Localidad entity.
+     * Creates a new Usuario entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Localidad();
+        $entity = new Usuario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->addRole('ROLE_USER');
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                'success', 'Localidad creado correctamente.'
+                'success', 'Usuario creado correctamente.'
             );
 
-            return $this->redirect($this->generateUrl('localidad_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuarios_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('UbicacionBundle:Localidad:new.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Localidad entity.
+     * Creates a form to create a Usuario entity.
      *
-     * @param Localidad $entity The entity
+     * @param Usuario $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Localidad $entity)
+    private function createCreateForm(Usuario $entity)
     {
-        $form = $this->createForm(new LocalidadType(), $entity, array(
-            'action' => $this->generateUrl('localidad_create'),
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuarios_create'),
             'method' => 'POST',
             'attr' => array('class' => 'box-body')
         ));
@@ -86,60 +87,60 @@ class LocalidadController extends Controller
     }
 
     /**
-     * Displays a form to create a new Localidad entity.
+     * Displays a form to create a new Usuario entity.
      *
      */
     public function newAction()
     {
-        $entity = new Localidad();
+        $entity = new Usuario();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('UbicacionBundle:Localidad:new.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Localidad entity.
+     * Finds and displays a Usuario entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UbicacionBundle:Localidad')->find($id);
+        $entity = $em->getRepository('UsuariosBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Localidad entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UbicacionBundle:Localidad:show.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Localidad entity.
+     * Displays a form to edit an existing Usuario entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UbicacionBundle:Localidad')->find($id);
+        $entity = $em->getRepository('UsuariosBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Localidad entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UbicacionBundle:Localidad:edit.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -147,17 +148,17 @@ class LocalidadController extends Controller
     }
 
     /**
-    * Creates a form to edit a Localidad entity.
+    * Creates a form to edit a Usuario entity.
     *
-    * @param Localidad $entity The entity
+    * @param Usuario $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Localidad $entity)
+    private function createEditForm(Usuario $entity)
     {
-        $form = $this->createForm(new LocalidadType(), $entity, array(
-            'action' => $this->generateUrl('localidad_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuarios_update', array('id' => $entity->getId())),
+            'method' => 'POST',
             'attr' => array('class' => 'box-body')
         ));
 
@@ -173,17 +174,17 @@ class LocalidadController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Localidad entity.
+     * Edits an existing Usuario entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UbicacionBundle:Localidad')->find($id);
+        $entity = $em->getRepository('UsuariosBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Localidad entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,20 +195,20 @@ class LocalidadController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                'success', 'Localidad actualizado correctamente.'
+                'success', 'Usuario actualizado correctamente.'
             );
 
-            return $this->redirect($this->generateUrl('localidad_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $id)));
         }
 
-        return $this->render('UbicacionBundle:Localidad:edit.html.twig', array(
+        return $this->render('UsuariosBundle:Usuario:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Localidad entity.
+     * Deletes a Usuario entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -217,21 +218,21 @@ class LocalidadController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UbicacionBundle:Localidad')->find($id);
+            $entity = $em->getRepository('UsuariosBundle:Usuario')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Localidad entity.');
+                throw $this->createNotFoundException('Unable to find Usuario entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('localidad'));
+        return $this->redirect($this->generateUrl('usuarios'));
     }
 
     /**
-     * Creates a form to delete a Localidad entity by id.
+     * Creates a form to delete a Usuario entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -240,7 +241,7 @@ class LocalidadController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('localidad_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuarios_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
