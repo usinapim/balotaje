@@ -24,14 +24,21 @@
 //            porcentajeCambiemos = altura - ((cambiemos * altura) / total );
 //            porcentajeFpv = altura - ((fpv * altura) / total );
 
-            porcentajeCambiemos = 100 - ((cambiemos * 100) / total ) - 25;
-            porcentajeFpv = 100 - ((fpv * 100) / total ) - 25;
+            porcentajeCambiemos = 100 - ((cambiemos * 100) / total );
+            porcentajeFpv = 100 - ((fpv * 100) / total );
 
-            if (porcentajeCambiemos < 16.915) {
-                porcentajeCambiemos = 16.915;
+            if (porcentajeCambiemos < 39) {
+                porcentajeCambiemos = 39;
             }
-            if (porcentajeFpv < 18.085) {
-                porcentajeFpv = 18.085;
+            if (porcentajeFpv < 39) {
+                porcentajeFpv = 39;
+            }
+
+            if (porcentajeCambiemos > 86) {
+                porcentajeCambiemos = 86;
+            }
+            if (porcentajeFpv > 86) {
+                porcentajeFpv = 86;
             }
 
 //            $('#div-cambiemos').css('padding-top', porcentajeCambiemos);
