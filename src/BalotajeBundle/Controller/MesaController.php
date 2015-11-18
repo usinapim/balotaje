@@ -56,7 +56,7 @@ class MesaController extends Controller {
 
 			$parameter = array();
 
-			if ( $form->get( 'sumbitNew' )->isClicked() ) {
+			if ( $form->get( 'submitAndAdd' )->isClicked() ) {
 				$ruta = 'mesas_new';
 			} else {
 				$ruta      = 'mesas_show';
