@@ -27,18 +27,18 @@
             porcentajeCambiemos = 100 - ((cambiemos * 100) / total );
             porcentajeFpv = 100 - ((fpv * 100) / total );
 
-            if (porcentajeCambiemos < 39) {
-                porcentajeCambiemos = 39;
+            if (porcentajeCambiemos < 15) {
+                porcentajeCambiemos = 15;
             }
-            if (porcentajeFpv < 39) {
-                porcentajeFpv = 39;
+            if (porcentajeFpv < 14) {
+                porcentajeFpv = 14;
             }
 
-            if (porcentajeCambiemos > 86) {
-                porcentajeCambiemos = 86;
+            if (porcentajeCambiemos > 43) {
+                porcentajeCambiemos = 43;
             }
-            if (porcentajeFpv > 86) {
-                porcentajeFpv = 86;
+            if (porcentajeFpv > 41) {
+                porcentajeFpv = 41;
             }
 
 //            $('#div-cambiemos').css('padding-top', porcentajeCambiemos);
@@ -107,9 +107,9 @@
         {#background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}') no-repeat;#}
         {#}#}
         .row {
-            background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}') no-repeat;
+            background: url('{{ asset('bundles/app/img/BANDERA FONDO.jpg') }}') no-repeat center;
             /*background-size: cover;*/
-            background-size: 100% 500px;
+            background-size: 80% 500px;
             width: 100%;
             /*height: 100%;*/
             overflow: hidden;
@@ -118,6 +118,12 @@
         }
         .logo-pim{
             height: 3%;
+        }
+
+        .logo-pim img{
+            margin-left: 40%;
+            padding-top: 2%;
+            width: 15%;
         }
     </style>
     {#<div class="row"#}
@@ -130,25 +136,25 @@
         </div>
         <div id="div-grafico">
             <div class="col-md-2 col-md-offset-1"
-                 style="margin-right: 60px; text-align: right; font-size: 35px; position: relative; top:80%; left: 18%; z-index: 1000000;">
+                 style="margin-right: -4%; text-align: right; font-size: 35px; position: relative; top:80%; left: 18%; z-index: 1000000;">
                 <span id="porcentaje-fpv" class="label label-primary">FpV</span><br>
                 <img src="{{ asset('bundles/app/img/fpv_logo.jpg') }}" style="max-height: 45px;">
 
             </div>
-            <div class="col-md-3 text-center" style="margin-right: -80px; top:100%" id="div-fpv">
+            <div class="col-md-4 text-center" style="margin-right: -90px; top:100%" id="div-fpv">
 
 
-                <img style="position: absolute" class="img-responsive">
+                <img style="position: absolute; width: 90%" class="img-responsive">
             </div>
 
-            <div class="col-md-3  text-center" style="margin-left: 0px;top:100%;  " id="div-cambiemos">
+            <div class="col-md-4  text-center" style="margin-left: 0px;top:100%;  " id="div-cambiemos">
 
-                <img style="position: absolute" class="img-responsive">
+                <img style="position: absolute; width: 90%" class="img-responsive">
 
             </div>
 
             <div class="col-md-2"
-                 style=" font-size: 35px; position: relative; top:60%;top:80%; left: -18%; z-index: 1000000; ">
+                 style=" font-size: 35px; position: relative; top:60%;top:80%; left: -26%; z-index: 1000000; ">
                 <span id="porcentaje-cambiemos" class="label label-warning"
                       style="margin-left: 20%;">Cambiemos</span><br>
                 <img src="{{ asset('bundles/app/img/cambiemos_logo.png') }}"
