@@ -10,7 +10,7 @@
         $(document).ready(function () {
             $('.main-footer').hide();
             //altura = $(".content-wrapper").height() - 100;
-            altura = window.innerHeight;
+            altura = window.innerHeight >= window.innerWidth ? window.innerWidth: window.innerHeight;
             cambiemos = {{ votos.cambiemos |default(1)}};
             fpv = {{ votos.fpv |default(1) }};
 
