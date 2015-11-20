@@ -12,10 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class MesaRepository extends EntityRepository
 {
-    public function contarVotos() {
+    public function contarVotos($filtros = null) {
 
         $qb = $this->createQueryBuilder('m')
             ->select('SUM(m.resultadoCambiemos) as cambiemos, SUM(m.resultadoFpv) as fpv ');
+
+        if ($filtros){
+            if (($filtros['localidad'])){
+                $qb->andWhere("m.localidad = :localidad")
+                    ->setParameter("localidad", $filtros['localidad']);
+            }
+        }
 
         return $qb->getQuery()->getResult();
     }
