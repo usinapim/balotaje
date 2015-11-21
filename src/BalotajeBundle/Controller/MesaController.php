@@ -273,4 +273,29 @@ class MesaController extends Controller {
 		            ->add( 'submit', 'submit', array( 'label' => 'Delete' ) )
 		            ->getForm();
 	}
+
+	public function exporarResultadosAction() {
+
+		$em = $this->getDoctrine()->getManager();
+
+		$entities = $em->getRepository( 'BalotajeBundle:Mesa' )->findAll();
+
+		$filename = "resultados_balotaje_2015.xls";
+
+
+		/* @var $exportExcel \UtilBundle\Services\ExcelTool */
+		$exportExcel = $this->get('excel.tool');
+		$exportExcel->setTitle('Resultados 2015');
+		$exportExcel->setDescripcion('Listado de resultados balotaje 2015');
+
+
+		$response = $exportExcel->buildSheetResultados($entities);
+
+		$response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+		$response->headers->set('Content-Disposition', 'attachment;filename='.$filename.'');
+		$response->headers->set('Pragma', 'public');
+		$response->headers->set('Cache-Control', 'maxage=1');
+
+		return $response;
+	}
 }

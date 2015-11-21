@@ -28,3 +28,7 @@ mesas_delete:
     path:     /{id}/delete
     defaults: { _controller: "BalotajeBundle:Mesa:delete" }
     methods:  [POST, DELETE]
+
+exportar_resultados:
+    path: /exportar_resultados
+    defaults: { _controller: "BalotajeBundle:Mesa:exporarResultados" }
